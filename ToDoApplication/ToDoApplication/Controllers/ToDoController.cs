@@ -24,8 +24,7 @@ namespace ToDoApplication.Controllers
         [HttpGet]
         public IEnumerable<ToDoItem> Get()
         {
-            var toDos = _context.ToDoTables.ToList().ToModelUsingMapper<List<ToDoTable>, List<ToDoItem>>();
-            return toDos;
+            return _context.ToDoTables.ToList().ToModelUsingMapper<List<ToDoTable>, List<ToDoItem>>();
         }
 
         [HttpGet, Route("api/todo/{id}")]
@@ -36,7 +35,7 @@ namespace ToDoApplication.Controllers
 
 
         // POST api/todo/
-        public ToDoItem Post([FromBody]ToDoItem todo)
+        public IEnumerable<ToDoItem> Post([FromBody]ToDoItem todo)
         {
             if (!ModelState.IsValid)
             {
@@ -47,22 +46,29 @@ namespace ToDoApplication.Controllers
             _context.ToDoTables.Add(entity);
             _context.SaveChanges();
 
-            return todo;
+            return _context.ToDoTables.ToList().ToModelUsingMapper<List<ToDoTable>, List<ToDoItem>>();
         }
 
         // PUT api/todo/
-        public ToDoItem Put([FromBody]ToDoItem todo)
+        public IEnumerable<ToDoItem> Put([FromBody]ToDoItem todo)
         {
             if (!ModelState.IsValid)
             {
                 throw new ArgumentNullException("failed to add todo");
             }
 
+
+            ToDoItem temp = todo;
+
+            ToDoTable table = _context.ToDoTables.Find(todo.Id);
+            _context.ToDoTables.Remove(table);
+            _context.SaveChanges();
+
             var entity = todo.ToModelUsingMapper<ToDoTable>();
             _context.ToDoTables.Add(entity);
             _context.SaveChanges();
 
-            return todo;
+            return _context.ToDoTables.ToList().ToModelUsingMapper<List<ToDoTable>, List<ToDoItem>>();
         }
 
         // DELETE api/todo

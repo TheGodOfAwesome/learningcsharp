@@ -4,12 +4,14 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { TodosComponent } from './todos/todos.component';
+import { TodolistComponent } from './todolist/todolist.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodosComponent
+    TodosComponent,
+    TodolistComponent
   ],
   imports: [
     BrowserModule
