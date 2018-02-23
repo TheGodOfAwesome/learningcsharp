@@ -1,0 +1,1 @@
+﻿Insert into ToDoTable values (1, 'Test', 'Testing', '', '', '')

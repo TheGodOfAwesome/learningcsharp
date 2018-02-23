@@ -1,0 +1,1 @@
+﻿Insert Into UsersTable values(1, 'Kuzi', 'kuzivakwashe.muvezwa@structureit.net')
