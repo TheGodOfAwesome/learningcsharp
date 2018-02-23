@@ -1,5 +1,9 @@
-<p>
-  todos works!
-</p>
+<ul>
+  <li *ngFor="let toDo of toDos">
+    <span class="badge">{{toDo.id}}</span>  
+    <h4>{{toDo.name}}</h4>
+    <h5> Task: {{toDo.description}} </h5>
+  </li>
+</ul>
 
 <app-todolist></app-todolist>
